@@ -10,7 +10,7 @@ interface DataList {
     data: DataObject[]
 }
 
-const Chart: React.FC<DataList> = (props) => {
+const RenderLineChart: React.FC<DataList> = (props) => {
   return (
     <LineChart width={800} height={400} data={props.data}>
       <XAxis dataKey="year" />
@@ -22,4 +22,4 @@ const Chart: React.FC<DataList> = (props) => {
   );
 }
 
-export default Chart;
+export default RenderLineChart;
