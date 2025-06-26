@@ -19,6 +19,9 @@ export default function Page() {
     setChartType("bar");
   }
 
+  const [threshold, setThreshold] = useState(0);
+  const filteredData = coffeeData.filter(item => item.sales > threshold);
+
   return (
     <main>
       <h1 className="m-10 text-6xl font-bold text-center">Coffee Sales</h1>
@@ -26,10 +29,23 @@ export default function Page() {
         <button onClick={handleLineButton} className="px-4 py-2 bg-[#ff5eb9] rounded-4xl">Line Chart</button>
         <button onClick={handleBarButton} className="px-4 py-2 bg-[#ff9717] rounded-4xl">Bar Chart</button>
       </div>
-      <div className="m-2 justify-self-center">
+      <div className="m-2 justify-self-center w-200 h-100">
         { chartType === 'line' ?
-        <RenderLineChart data={coffeeData}/> : 
-        <RenderBarChart data={coffeeData} /> }
+        <RenderLineChart data={filteredData}/> : 
+        <RenderBarChart data={filteredData} /> }
+      </div>
+      <div className="m-5 justify-self-center justify-center text-center">
+        <h2 className="font-bold text-xl">Filter Sales</h2>
+        <input
+          type="range"
+          min="0"
+          max="10000"
+          value={threshold}
+          onChange={(e) => setThreshold(Number(e.target.value))}
+          placeholder="Enter sales threshold"
+          className="bg-blue-600 p-2 text-xl rounded-xl"
+        />
+        <h4>{threshold}</h4>
       </div>
     </main>
   );
